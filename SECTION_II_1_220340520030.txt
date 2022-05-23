@@ -1,0 +1,27 @@
+create table tempp(
+String1 varchar(20),
+String2 varchar(20),
+ANS varchar(20)
+);
+select * from tempp;
+delimiter // 
+create procedure PROC1(String1 varchar(20), String2 varchar(20))
+begin 
+	declare a int;
+    set a = locate(String1,String2);
+    if(a != 0) then
+    insert into tempp values(String1, String2, 'PRESENT');
+    else 
+    insert into tempp values(String1, String2, 'ABSENT');
+    end if;
+end; //
+delimiter ;
+
+call PROC1('DAC','CDAC');
+call PROC1('ABCDE','ABC');
+call PROC1('ABC','ABCDE');
+select * from tempp;
+
+
+
+
